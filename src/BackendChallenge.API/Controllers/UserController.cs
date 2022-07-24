@@ -20,7 +20,7 @@ namespace BackendChallenge.API.Controllers
         }
 
         [HttpGet("me")]
-        [ProducesResponseType(typeof(PaginatedApiResponse<UserResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
         public IActionResult Me()
         {

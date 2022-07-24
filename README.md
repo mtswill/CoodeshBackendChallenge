@@ -61,3 +61,7 @@ Para ter acesso ao `Swagger`, basta abrir a URL indicada pela execução mostrad
 ```
 http://localhost:5193/swagger
 ```
+
+## Vídeos de apresentação
+- https://www.loom.com/embed/8a7891ff8810430e9fa22965270d326f
+- https://www.loom.com/embed/f6b6324ce2d84f819d9aaf2713f6a432

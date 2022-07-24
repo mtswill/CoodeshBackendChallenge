@@ -18,18 +18,16 @@ namespace BackendChallenge.Service.Services
         private readonly IFreeDictionaryRepository _freeDictionaryRepository;
         private readonly IEntryRepository _entryRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IUserHistoryRepository _userHistoryRepository;
         private readonly IMapper _mapper;
         private readonly IUser _user;
 
-        public EntryService(IFreeDictionaryRepository freeDictionaryRepository, IUser user, IUserRepository userRepository, IEntryRepository entryRepository, IMapper mapper, IUserHistoryRepository userHistoryRepository)
+        public EntryService(IFreeDictionaryRepository freeDictionaryRepository, IUser user, IUserRepository userRepository, IEntryRepository entryRepository, IMapper mapper)
         {
             _freeDictionaryRepository = freeDictionaryRepository;
             _user = user;
             _userRepository = userRepository;
             _entryRepository = entryRepository;
             _mapper = mapper;
-            _userHistoryRepository = userHistoryRepository;
         }
 
         public async Task<Result<object>> SaveFavoriteWordAsync(string word)
@@ -114,7 +112,7 @@ namespace BackendChallenge.Service.Services
                 Word = word
             };
 
-            await _userHistoryRepository.AddHistoryAsync(userHistory);
+            await _userRepository.AddHistoryAsync(userHistory);
         }
 
         private string BuildCacheKey(string word, string method, PaginationInput? paginationInput = null)

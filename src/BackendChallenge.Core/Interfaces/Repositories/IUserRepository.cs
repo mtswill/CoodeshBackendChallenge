@@ -13,5 +13,7 @@ namespace BackendChallenge.Core.Interfaces.Repositories
         Task<PaginationResult<FavoriteWord>?> GetFavoriteWordsAsync(Guid userId, PaginationInput paginationInput);
         Task<bool> SaveFavoriteWordAsync(FavoriteWord favoriteWord);
         Task<bool> UnfavoriteWordAsync(FavoriteWord favoriteWord);
+        Task<bool> AddHistoryAsync(UserHistory userHistory);
+        Task<PaginationResult<UserHistory>?> GetUserHistoryAsync(Guid userId, PaginationInput paginationInput);
     }
 }

@@ -12,7 +12,7 @@ namespace BackendChallenge.Core.Helpers
         {
             var entryOptions = new MemoryCacheEntryOptions
             {
-                SlidingExpiration = TimeSpan.FromMinutes(2),
+                SlidingExpiration = TimeSpan.FromMinutes(1),
                 AbsoluteExpiration = DateTime.UtcNow.AddHours(2)
             };
 

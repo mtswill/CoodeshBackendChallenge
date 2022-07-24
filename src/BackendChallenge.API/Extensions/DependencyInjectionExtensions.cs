@@ -35,7 +35,6 @@ namespace BackendChallenge.API.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IEntryRepository, EntryRepository>();
             services.AddScoped<IFreeDictionaryRepository, FreeDictionaryRepository>();
-            services.AddScoped<IUserHistoryRepository, UserHistoryRepository>();
         }
 
         public static void ConfigureHttpClient(this IServiceCollection services, IConfiguration configuration)

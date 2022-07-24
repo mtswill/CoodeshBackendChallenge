@@ -57,13 +57,33 @@ namespace BackendChallenge.Infrastructure.Repositories
         public async Task<PaginationResult<FavoriteWord>?> GetFavoriteWordsAsync(Guid userId, PaginationInput paginationInput)
         {
             var query = _context.FavoriteWords!.AsQueryable();
-            query = query.AsNoTracking().OrderBy(x => x.Word);
+            query = query.AsNoTracking().OrderBy(x => x.Word).Where(x => x.UserId == userId);
 
             var paginatedQuery = BuildPagination(query, paginationInput);
             var words = await paginatedQuery.ToListAsync();
 
             var result = BuildPaginationResult<FavoriteWord>(paginationInput, await GetTotalCountAndTotalPagesAsync(query, paginationInput));
             result.Results = words!;
+
+            return result;
+        }
+
+        public async Task<bool> AddHistoryAsync(UserHistory userHistory)
+        {
+            await _context.UserHistories!.AddAsync(userHistory);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<PaginationResult<UserHistory>?> GetUserHistoryAsync(Guid userId, PaginationInput paginationInput)
+        {
+            var query = _context.UserHistories!.AsQueryable();
+            query = query.AsNoTracking().OrderByDescending(x => x.Added).Where(x => x.UserId == userId);
+
+            var paginatedQuery = BuildPagination(query, paginationInput);
+            var history = await paginatedQuery.ToListAsync();
+
+            var result = BuildPaginationResult<UserHistory>(paginationInput, await GetTotalCountAndTotalPagesAsync(query, paginationInput));
+            result.Results = history!;
 
             return result;
         }

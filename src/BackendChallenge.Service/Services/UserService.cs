@@ -15,16 +15,14 @@ namespace BackendChallenge.Service.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IUserHistoryRepository _userHistoryRepository;
         private readonly IUser _user;
         private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository, IMapper mapper, IUser user, IUserHistoryRepository userHistoryRepository)
+        public UserService(IUserRepository userRepository, IMapper mapper, IUser user)
         {
             _userRepository=userRepository;
             _mapper=mapper;
             _user=user;
-            _userHistoryRepository=userHistoryRepository;
         }
 
         public async Task<Result<UserFavoriteWordsResponse>> GetFavoriteWordsAsync(PaginationInput paginationInput)
@@ -53,7 +51,7 @@ namespace BackendChallenge.Service.Services
                 return cached;
             }
 
-            var result = await _userHistoryRepository.GetUserHistoryAsync(_user.RequestUser!.Id, paginationInput);
+            var result = await _userRepository.GetUserHistoryAsync(_user.RequestUser!.Id, paginationInput);
             var content = _mapper.Map<PaginatedApiResponse<UserHistoryResponse>>(result);
 
             var response = new Result<UserHistoryResponse>().Success(content);

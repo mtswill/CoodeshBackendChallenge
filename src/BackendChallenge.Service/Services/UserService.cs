@@ -44,7 +44,7 @@ namespace BackendChallenge.Service.Services
 
         public async Task<Result<UserHistoryResponse>> GetGetUserHistoryAsync(PaginationInput paginationInput)
         {
-            var cacheKey = BuildCacheKey(nameof(GetFavoriteWordsAsync), paginationInput);
+            var cacheKey = BuildCacheKey(nameof(GetGetUserHistoryAsync), paginationInput);
             if (CacheHelper.TryGetCache<UserHistoryResponse>(cacheKey, out var cached))
             {
                 cached.FromCache = true;
